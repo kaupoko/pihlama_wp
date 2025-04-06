@@ -1,0 +1,17 @@
+name: Comment on when an issue is closed
+on:
+  issues:
+    types:
+      - closed
+jobs:
+  closed_issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Comment on closed issue
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+           The issue is now resolved.
